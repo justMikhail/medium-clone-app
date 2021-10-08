@@ -1,3 +1,7 @@
 <template>
-  <div>Hello medium-clone-app</div>
+  <div>
+    Hello medium-clone-app
+
+    <router-view />
+  </div>
 </template>
