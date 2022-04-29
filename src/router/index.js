@@ -16,9 +16,9 @@ const routes = [
 
 ]
 
-const router = createRouter({
+const appRouter = createRouter({
   history: createWebHashHistory(),
   routes
 })
 
-export default router
+export default appRouter
