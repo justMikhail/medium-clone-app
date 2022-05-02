@@ -20,6 +20,7 @@
                 class='form-control form-control-lg'
                 type='text'
                 placeholder='Username'
+                v-model='userName'
               />
             </fieldset>
 
@@ -28,6 +29,7 @@
                 class='form-control form-control-lg'
                 type='text'
                 placeholder='Email'
+                v-model='userEmail'
               />
             </fieldset>
 
@@ -36,6 +38,7 @@
                 class='form-control form-control-lg'
                 type='password'
                 placeholder='Password'
+                v-model='userPassword'
               />
             </fieldset>
 
@@ -60,6 +63,14 @@
 export default {
   name: 'RegisterPage',
 
+  data() {
+    return {
+      userEmail: '',
+      userName: '',
+      userPassword: '',
+    }
+  },
+
   computed: {
     isSubmitting() {
       return this.$store.state.auth.isSubmitting;
@@ -68,14 +79,16 @@ export default {
 
   methods: {
     submitHandler() {
-      console.log('==== submit ====');
       this.$store
         .dispatch('register', {
-          email: 'email-sfsdfsdfsdfg4654654456fghfsdfsdfsjuyddddfdsf@gegwsdfsdfe.com',
-          username: 'username-sdfsynssdfd456il897o45645645fsdffghfgye123sdfs',
-          password: '987654321'
+          email: this.userEmail,
+          username: this.userName,
+          password: this.userPassword,
         })
-        .then(user => console.log('Successfully register user', user));
+        .then(user => {
+          this.$router.push({name: 'home'})
+          console.log('Successfully register user', user)
+        });
     }
   }
 };
