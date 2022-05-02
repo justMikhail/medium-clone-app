@@ -1,12 +1,12 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
-import Home from '@/views/Home';
+import HomePage from '@/views/HomePage';
 import Register from '@/views/Register';
 
-const routes = [
+const AppRoutes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
+    name: 'HomePage',
+    component: HomePage
   },
   {
     path: '/register',
@@ -18,7 +18,7 @@ const routes = [
 
 const appRouter = createRouter({
   history: createWebHashHistory(),
-  routes
+  routes: AppRoutes
 })
 
 export default appRouter
