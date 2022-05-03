@@ -4,11 +4,11 @@
       <div class='row'>
         <div class='col-md-6 offset-md-3 col-xs-12'>
           <h1 class='text-xs-center'>
-            Sign Up
+            Sign In
           </h1>
           <p class='text-xs-center'>
-            <router-link :to='{name: "login"}'>
-              Have an account?
+            <router-link :to='{name: "register"}'>
+              Need an account?
             </router-link>
           </p>
 
@@ -19,14 +19,6 @@
           <!-- /.tex-xs-center -->
 
           <form @submit.prevent='submitHandler'>
-            <fieldset class='form-group'>
-              <input
-                class='form-control form-control-lg'
-                type='text'
-                placeholder='Username'
-                v-model='userName'
-              />
-            </fieldset>
 
             <fieldset class='form-group'>
               <input
@@ -50,7 +42,7 @@
               class='btn btl-lg btn-primary pull-xs-right'
               :disabled='isSubmitting'
             >
-              Sign Up
+              Sign In
             </button>
 
           </form>
@@ -64,12 +56,12 @@
 </template>
 
 <script>
+import {mapState} from 'vuex';
 import AppValidationErrors from '@/components/ValidationErrors';
 import {actionTypes} from '@/store/modules/auth';
-import {mapState} from 'vuex';
 
 export default {
-  name: 'RegisterPage',
+  name: 'LoginPage',
 
   components: {
     AppValidationErrors
@@ -78,7 +70,6 @@ export default {
   data() {
     return {
       userEmail: '',
-      userName: '',
       userPassword: ''
     };
   },
@@ -93,9 +84,8 @@ export default {
   methods: {
     submitHandler() {
       this.$store
-        .dispatch(actionTypes.register, {
+        .dispatch(actionTypes.login, {
           email: this.userEmail,
-          username: this.userName,
           password: this.userPassword
         })
         .then(() => {

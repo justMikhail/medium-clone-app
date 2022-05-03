@@ -1,6 +1,18 @@
 <template>
   <div>
-    Hello medium-clone-app
+    <AppNavBar/>
     <router-view />
   </div>
 </template>
+
+<script>
+import AppNavBar from '@/components/NavBar';
+
+export default {
+  name: 'App',
+
+  components: {
+    AppNavBar,
+  }
+}
+</script>
