@@ -5,7 +5,7 @@ const state = {
   isSubmitting: false,
   currentUser: null,
   validationErrors: null,
-  isLoggedIn: false,
+  isLoggedIn: null,
 };
 
 export const mutationTypes = {
@@ -53,7 +53,7 @@ export const actionTypes = {
   login: '[auth] login',
 }
 
-const actions = {
+export const actions = {
   [actionTypes.register](context, credentials) {
     return new Promise(resolve => {
       context.commit(mutationTypes.registerStart)
@@ -93,8 +93,27 @@ const actions = {
   },
 }
 
+export const gettersTypes = {
+  currentUser: '[auth] currentUser',
+  isLoggedIn: '[auth] isLoggedIn',
+  isAnonymous: '[auth] isAnonymous',
+}
+
+const getters = {
+  [gettersTypes.currentUser]: state => {
+    return state.currentUser
+  },
+  [gettersTypes.isLoggedIn]: state => {
+    return Boolean(state.isLoggedIn)
+  },
+  [gettersTypes.isAnonymous]: state => {
+    return state.isLoggedIn === false
+  },
+}
+
 export default {
   state,
   mutations,
-  actions
+  actions,
+  getters,
 };

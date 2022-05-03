@@ -51,7 +51,7 @@
           </li>
         </template>
 
-        <template v-if='!isLoggedIn'>
+        <template v-if='isAnonymous'>
           <li class='nav-item'>
             <router-link :to='{name: "login"}' class='nav-link' active-class='active'>
               Sign In
@@ -72,18 +72,18 @@
 </template>
 
 <script>
+import {gettersTypes} from '@/store/modules/auth';
 import {mapState} from 'vuex';
 
 export default {
   name: 'AppNavBar',
 
-
-
   computed: {
     ...mapState({
-      currentUser: state => state.auth.currentUser,
-      isLoggedIn: state => state.auth.isLoggedIn
-    })
+      currentUser: gettersTypes.currentUser,
+      isLoggedIn: gettersTypes.isLoggedIn,
+      isAnonymous: gettersTypes.isAnonymous,
+    }),
   }
 };
 </script>
