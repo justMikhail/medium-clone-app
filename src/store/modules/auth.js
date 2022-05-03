@@ -3,6 +3,7 @@ import {setItemInLocalStorage} from '@/helpers/persistanceStorege';
 
 const state = {
   isSubmitting: false,
+  isLoading: false,
   currentUser: null,
   validationErrors: null,
   isLoggedIn: null,
@@ -16,6 +17,22 @@ export const mutationTypes = {
   loginStart: '[auth] loginStart',
   loginSuccess: '[auth] loginSuccess',
   loginFailure: '[auth] loginFailure',
+
+  getCurrentUserStart: '[auth] getCurrentUserStart',
+  getCurrentUserSuccess: '[auth] getCurrentUserSuccess',
+  getCurrentUserFailure: '[auth] getCurrentUserFailure',
+}
+
+export const actionTypes = {
+  register: '[auth] register',
+  login: '[auth] login',
+  getCurrentUser: '[auth] getCurrentUser',
+}
+
+export const gettersTypes = {
+  currentUser: '[auth] currentUser',
+  isLoggedIn: '[auth] isLoggedIn',
+  isAnonymous: '[auth] isAnonymous',
 }
 
 const mutations = {
@@ -46,14 +63,23 @@ const mutations = {
     state.isSubmitting = false;
     state.validationErrors = payload;
   },
+  [mutationTypes.getCurrentUserStart](state) {
+    state.isLoading = true;
+  },
+  [mutationTypes.getCurrentUserSuccess](state, payload) {
+    state.isLoading = false;
+    state.currentUser = payload;
+    state.isLoggedIn = true;
+  },
+  [mutationTypes.getCurrentUserFailure](state) {
+    state.isLoading = false;
+    state.isLoggedIn = false;
+    state.currentUser = null;
+  }
 };
 
-export const actionTypes = {
-  register: '[auth] register',
-  login: '[auth] login',
-}
-
-export const actions = {
+const actions = {
+  // register
   [actionTypes.register](context, credentials) {
     return new Promise(resolve => {
       context.commit(mutationTypes.registerStart)
@@ -72,7 +98,7 @@ export const actions = {
         })
     })
   },
-
+  // login
   [actionTypes.login](context, credentials) {
     return new Promise(resolve => {
       context.commit(mutationTypes.loginStart)
@@ -91,12 +117,21 @@ export const actions = {
         })
     })
   },
-}
-
-export const gettersTypes = {
-  currentUser: '[auth] currentUser',
-  isLoggedIn: '[auth] isLoggedIn',
-  isAnonymous: '[auth] isAnonymous',
+  // get current user
+  [actionTypes.getCurrentUser](context) {
+    return new Promise(resolve => {
+      context.commit(mutationTypes.getCurrentUserStart)
+      authApi
+        .getCurrentUser()
+        .then(response => {
+          context.commit(mutationTypes.getCurrentUserSuccess, response.data.user)
+          resolve(response.data.user)
+        })
+        .catch(() => {
+          context.commit(mutationTypes.getCurrentUserFailure)
+        })
+    })
+  },
 }
 
 const getters = {

@@ -73,13 +73,13 @@
 
 <script>
 import {gettersTypes} from '@/store/modules/auth';
-import {mapState} from 'vuex';
+import {mapGetters} from 'vuex';
 
 export default {
   name: 'AppNavBar',
 
   computed: {
-    ...mapState({
+    ...mapGetters({
       currentUser: gettersTypes.currentUser,
       isLoggedIn: gettersTypes.isLoggedIn,
       isAnonymous: gettersTypes.isAnonymous,
