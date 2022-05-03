@@ -4,38 +4,49 @@ import {setItemInLocalStorage} from '@/helpers/persistanceStorege';
 const state = {
   isSubmitting: false,
   currentUser: null,
-  validationError: null,
+  validationErrors: null,
   isLoggedIn: null
 };
 
+export const mutationTypes = {
+  registerStart: '[auth] registerStart',
+  registerSuccess: '[auth] registerSuccess',
+  registerFailure: '[auth] registerFailure',
+}
+
+
 const mutations = {
-  registerStart(state) {
+  [mutationTypes.registerStart](state) {
     state.isSubmitting = true;
   },
-  registerSuccess(state, payload) {
+  [mutationTypes.registerSuccess](state, payload) {
     state.isSubmitting = false;
     state.currentUser = payload;
     state.isLoggedIn = true;
   },
-  registerFailure(state, payload) {
+  [mutationTypes.registerFailure](state, payload) {
     state.isSubmitting = false;
-    state.validationError = payload;
+    state.validationErrors = payload;
   }
 };
 
+export const actionTypes = {
+  register: '[auth] register'
+}
+
 const actions = {
-  register(context, credentials) {
+  [actionTypes.register](context, credentials) {
     return new Promise(resolve => {
-      context.commit('registerStart')
+      context.commit(mutationTypes.registerStart)
       authApi
         .register(credentials)
         .then(response => {
-          context.commit('registerSuccess', response.data.user)
+          context.commit(mutationTypes.registerSuccess, response.data.user)
           setItemInLocalStorage('accessToken', response.data.user.token)
           resolve(response.data.user)
         })
         .catch(result => {
-          context.commit('registerFailure', result.response.data.errors)
+          context.commit(mutationTypes.registerFailure, result.response.data.errors)
         })
     })
   }

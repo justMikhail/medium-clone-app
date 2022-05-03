@@ -11,7 +11,11 @@
               Need an account?
             </router-link>
           </p>
-          VALIDATION ERRORS
+
+          <AppValidationErrors
+            v-if='validationErrors'
+            :validation-errors='validationErrors'
+          />
           <!-- /.tex-xs-center -->
 
           <form @submit.prevent='submitHandler'>
@@ -60,34 +64,44 @@
 </template>
 
 <script>
+import AppValidationErrors from '@/components/ValidationErrors';
+import {actionTypes} from '@/store/modules/auth';
+
 export default {
   name: 'RegisterPage',
+
+  components: {
+    AppValidationErrors
+  },
 
   data() {
     return {
       userEmail: '',
       userName: '',
-      userPassword: '',
-    }
+      userPassword: ''
+    };
   },
 
   computed: {
     isSubmitting() {
       return this.$store.state.auth.isSubmitting;
+    },
+    validationErrors() {
+      return this.$store.state.auth.validationErrors;
     }
   },
 
   methods: {
     submitHandler() {
       this.$store
-        .dispatch('register', {
+        .dispatch(actionTypes.register, {
           email: this.userEmail,
           username: this.userName,
-          password: this.userPassword,
+          password: this.userPassword
         })
         .then(user => {
-          this.$router.push({name: 'home'})
-          console.log('Successfully register user', user)
+          this.$router.push({name: 'home'});
+          console.log('Successfully register user', user);
         });
     }
   }
