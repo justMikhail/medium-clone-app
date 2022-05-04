@@ -1,14 +1,14 @@
 <template>
   <nav class='navbar navbar-light'>
     <div class='container'>
-      <router-link :to='{name: "home"}' class='navbar-brand'>
+      <router-link :to='{name: "global-feed"}' class='navbar-brand'>
         Medium Clone
       </router-link>
 
       <ul class='nav navbar-nav pull-xs-right'>
         <li class='nav-item'>
           <router-link
-            :to='{name: "home"}'
+            :to='{name: "global-feed"}'
             class='nav-link'
             active-class='active'
             exact
@@ -20,7 +20,7 @@
         <template v-if='isLoggedIn'>
           <li class='nav-item'>
             <router-link
-              :to='{name: "home"}'
+              :to='{name: "global-feed"}'
               class='nav-link'
               active-class='active'
             >
@@ -31,7 +31,7 @@
 
           <li class='nav-item'>
             <router-link
-              :to='{name: "home"}'
+              :to='{name: "global-feed"}'
               class='nav-link'
               active-class='active'
             >
@@ -41,7 +41,7 @@
 
           <li class='nav-item'>
             <router-link
-              :to='{name: "home", params: {slug: currentUser.userName}}'
+              :to='{name: "global-feed", params: {slug: currentUser.userName}}'
               class='nav-link'
             >
               <img class='user-pic' :src='currentUser.image'/>

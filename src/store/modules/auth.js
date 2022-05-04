@@ -10,17 +10,17 @@ const state = {
 };
 
 export const mutationTypes = {
-  registerStart: '[auth] registerStart',
-  registerSuccess: '[auth] registerSuccess',
-  registerFailure: '[auth] registerFailure',
+  registerStart: '[auth] Register start',
+  registerSuccess: '[auth] Register success',
+  registerFailure: '[auth] Register failure',
 
-  loginStart: '[auth] loginStart',
-  loginSuccess: '[auth] loginSuccess',
-  loginFailure: '[auth] loginFailure',
+  loginStart: '[auth] login start',
+  loginSuccess: '[auth] login success',
+  loginFailure: '[auth] login failure',
 
-  getCurrentUserStart: '[auth] getCurrentUserStart',
-  getCurrentUserSuccess: '[auth] getCurrentUserSuccess',
-  getCurrentUserFailure: '[auth] getCurrentUserFailure',
+  getCurrentUserStart: '[auth] Get current user Start',
+  getCurrentUserSuccess: '[auth] Get Current User success',
+  getCurrentUserFailure: '[auth] Get Current User failure',
 }
 
 export const actionTypes = {

@@ -64,7 +64,7 @@
 </template>
 
 <script>
-import AppValidationErrors from '@/components/ValidationErrors';
+import AppValidationErrors from '@/components/AppValidationErrors';
 import {actionTypes} from '@/store/modules/auth';
 import {mapState} from 'vuex';
 
@@ -99,7 +99,7 @@ export default {
           password: this.userPassword
         })
         .then(() => {
-          this.$router.push({name: 'home'});
+          this.$router.push({name: 'global-feed'});
         });
     }
   }

@@ -4,7 +4,7 @@
 </template>
 
 <script>
-import AppNavBar from '@/components/NavBar';
+import AppNavBar from '@/components/AppNavBar';
 import {actionTypes} from '@/store/modules/auth';
 
 export default {
