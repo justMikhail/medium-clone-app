@@ -33,7 +33,13 @@
           TAG LIST
         </router-link>
       </div>
-      PAGINATION
+
+      <AppPagination
+        :totalCount='mockTotalCount'
+        :limitCount='mockLimitCount'
+        :currentPage='mockCurrentPage'
+        :url='mockUrl'
+      />
     </div>
   </div>
 </template>
@@ -41,14 +47,28 @@
 <script>
 import {actionTypes} from '@/store/modules/feed';
 import {mapState} from 'vuex';
+import AppPagination from '@/components/AppPagination';
 
 export default {
   name: 'AppFeed',
+
+  components: {
+    AppPagination
+  },
 
   props: {
     apiUrl: {
       type: String,
       required: true
+    }
+  },
+
+  data() {
+    return {
+      mockTotalCount: 500,
+      mockLimitCount: 10,
+      mockCurrentPage: 5,
+      mockUrl: '/tags/dragons',
     }
   },
 
