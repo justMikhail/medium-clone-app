@@ -35,10 +35,10 @@
       </div>
 
       <AppPagination
-        :totalCount='mockTotalCount'
-        :limitCount='mockLimitCount'
-        :currentPage='mockCurrentPage'
-        :url='mockUrl'
+        :totalCount='feedData.articlesCount'
+        :limitCount='limitCount'
+        :currentPage='currentPage'
+        :url='baseUrl'
       />
     </div>
   </div>
@@ -48,6 +48,8 @@
 import {actionTypes} from '@/store/modules/feed';
 import {mapState} from 'vuex';
 import AppPagination from '@/components/AppPagination';
+import {FEED_VARS} from '@/helpers/vars'
+import {stringify, parseUrl} from 'query-string'
 
 export default {
   name: 'AppFeed',
@@ -65,10 +67,7 @@ export default {
 
   data() {
     return {
-      mockTotalCount: 500,
-      mockLimitCount: 10,
-      mockCurrentPage: 5,
-      mockUrl: '/tags/dragons',
+      limitCount: FEED_VARS.LIMIT,
     }
   },
 
@@ -77,12 +76,40 @@ export default {
       isLoading: state => state.feed.isLoading,
       feedData: state => state.feed.data,
       feedError: state => state.feed.error
-    })
+    }),
+    currentPage() {
+      return Number(this.$route.query.page || '1')
+    },
+    baseUrl() {
+      return this.$route.path
+    },
+    offset() {
+      return this.currentPage * this.limitCount - this.limitCount
+    }
+  },
+
+  watch: {
+    currentPage() {
+      this.fetchFeed();
+    }
   },
 
   mounted() {
-    console.log('==== init feed ====');
-    this.$store.dispatch(actionTypes.getFeed, {apiUrl: this.apiUrl});
+    this.fetchFeed();
+  },
+
+  methods: {
+    fetchFeed() {
+      const parsedUrl = parseUrl(this.apiUrl)
+      const stringifiesParams = stringify({
+        limit: this.limitCount,
+        offset: this.offset,
+        ...parsedUrl.query,
+      })
+      const apiUrlWithParams = `${parsedUrl.url}?${stringifiesParams}`
+      console.log('apiUrlWithParams: ', apiUrlWithParams);
+      this.$store.dispatch(actionTypes.getFeed, {apiUrl: this.apiUrl});
+    }
   }
 };
 </script>
