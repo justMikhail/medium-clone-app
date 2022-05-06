@@ -5,6 +5,7 @@
       <div class='row'>
 
         <div class='col-md-9'>
+          <AppFeedToggler :tag-name='tagName'/>
           <AppFeed :api-url='apiUrl' />
         </div>
 
@@ -21,6 +22,7 @@
 import AppFeed from '@/components/AppFeed';
 import AppTags from '@/components/AppTags';
 import AppBanner from '@/components/AppBanner';
+import AppFeedToggler from '@/components/AppFeedToggler';
 
 export default {
   name: 'TagFeedPage',
@@ -29,12 +31,16 @@ export default {
     AppFeed,
     AppTags,
     AppBanner,
+    AppFeedToggler,
   },
 
   computed: {
+    tagName() {
+      return this.$route.params.slug
+    },
+
     apiUrl() {
-      const tagName = this.$route.params.slug
-      return `./articles?tag=${tagName}`
+      return `./articles?tag=${this.tagName}`
     }
   }
 };

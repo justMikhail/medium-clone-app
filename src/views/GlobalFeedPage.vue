@@ -5,6 +5,7 @@
       <div class='row'>
 
         <div class='col-md-9'>
+          <AppFeedToggler />
           <AppFeed :api-url='apiUrl' />
         </div>
 
@@ -21,6 +22,7 @@
 import AppFeed from '@/components/AppFeed';
 import AppTags from '@/components/AppTags';
 import AppBanner from '@/components/AppBanner';
+import AppFeedToggler from '@/components/AppFeedToggler';
 
 export default {
   name: 'GlobalFeedPage',
@@ -29,6 +31,7 @@ export default {
     AppFeed,
     AppTags,
     AppBanner,
+    AppFeedToggler
   },
 
   data() {
