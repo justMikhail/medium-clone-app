@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div v-if="isLoading">Loading...</div>
-    <div v-if="feedError">Something bad happened</div>
+    <AppBasicLoader v-if='isLoading' />
+    <AppBasicError v-if='feedError' />
 
     <div v-if="feedData">
       <div
@@ -50,12 +50,16 @@ import {mapState} from 'vuex';
 import AppPagination from '@/components/AppPagination';
 import {FEED_VARS} from '@/helpers/vars'
 import {stringify, parseUrl} from 'query-string'
+import AppBasicLoader from '@/components/AppBasicLoader';
+import AppBasicError from '@/components/AppBasicError';
 
 export default {
   name: 'AppFeed',
 
   components: {
-    AppPagination
+    AppPagination,
+    AppBasicLoader,
+    AppBasicError,
   },
 
   props: {

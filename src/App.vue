@@ -16,7 +16,6 @@ export default {
 
   mounted() {
     this.$store.dispatch(actionTypes.getCurrentUser);
-    //console.log('Hello App');
   }
 };
 </script>

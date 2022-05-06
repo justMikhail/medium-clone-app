@@ -1,6 +1,6 @@
 <template>
   <div class='home-page'>
-    BANNER
+    <AppBanner />
     <div class='container page'>
       <div class='row'>
 
@@ -9,7 +9,7 @@
         </div>
 
         <div class='col-md-3'>
-          Popular Tags
+          <AppTags />
         </div>
 
       </div>
@@ -19,12 +19,16 @@
 
 <script>
 import AppFeed from '@/components/AppFeed';
+import AppTags from '@/components/AppTags';
+import AppBanner from '@/components/AppBanner';
 
 export default {
-  name: 'HomePage',
+  name: 'GlobalFeedPage',
 
   components: {
-    AppFeed
+    AppFeed,
+    AppTags,
+    AppBanner,
   },
 
   data() {

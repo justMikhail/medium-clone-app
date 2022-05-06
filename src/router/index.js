@@ -1,7 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import RegisterPage from '@/views/RegisterPage';
 import LoginPage from '@/views/LoginPage';
-import HomePage from '@/views/HomePage';
+import GlobalFeedPage from '@/views/GlobalFeedPage';
+import UserFeedPage from '@/views/UserFeedPage';
+import TagFeedPage from '@/views/TagFeedPage';
 
 const routes = [
   {
@@ -22,47 +24,47 @@ const routes = [
   {
     path: '/',
     name: 'global-feed',
-    component: HomePage
+    component: GlobalFeedPage
   },
   {
     path: '/feed',
-    name: 'your-feed',
-    component: HomePage
+    name: 'user-feed',
+    component: UserFeedPage
   },
   {
     path: '/tags/:slug',
     name: 'tag',
-    component: HomePage
+    component: TagFeedPage
   },
   {
     path: '/articles/new',
     name: 'createArticle',
-    component: HomePage
+    component: GlobalFeedPage
   },
   {
     path: '/articles/:slug',
     name: 'article',
-    component: HomePage
+    component: GlobalFeedPage
   },
   {
     path: '/articles/:slug/edit',
     name: 'editArticle',
-    component: HomePage
+    component: GlobalFeedPage
   },
   {
     path: '/settings',
     name: 'settings',
-    component: HomePage
+    component: GlobalFeedPage
   },
   {
     path: '/profiles/:slug',
     name: 'userProfile',
-    component: HomePage
+    component: GlobalFeedPage
   },
   {
     path: '/profiles/:slug/favorites',
     name: 'userProfileFavorites',
-    component: HomePage
+    component: GlobalFeedPage
   },
 ]
 
