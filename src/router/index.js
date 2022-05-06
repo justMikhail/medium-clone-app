@@ -4,6 +4,8 @@ import LoginPage from '@/views/LoginPage';
 import GlobalFeedPage from '@/views/GlobalFeedPage';
 import UserFeedPage from '@/views/UserFeedPage';
 import TagFeedPage from '@/views/TagFeedPage';
+import ArticlePage from '@/views/ArticlePage'
+import CreateArticlePage from '@/views/CreateArticlePage';
 
 const routes = [
   {
@@ -39,12 +41,12 @@ const routes = [
   {
     path: '/articles/new',
     name: 'createArticle',
-    component: GlobalFeedPage
+    component: CreateArticlePage
   },
   {
     path: '/articles/:slug',
     name: 'article',
-    component: GlobalFeedPage
+    component: ArticlePage
   },
   {
     path: '/articles/:slug/edit',

@@ -20,7 +20,7 @@
         <template v-if='isLoggedIn'>
           <li class='nav-item'>
             <router-link
-              :to='{name: "global-feed"}'
+              :to='{name: "createArticle"}'
               class='nav-link'
               active-class='active'
             >
@@ -35,7 +35,7 @@
               class='nav-link'
               active-class='active'
             >
-              <i class='ion-gear-a'></i> &nbsp; New Article
+              <i class='ion-gear-a'></i> &nbsp; Settings
             </router-link>
           </li>
 

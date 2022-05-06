@@ -30,7 +30,7 @@
           <h1>{{ article.title }}</h1>
           <p>{{ article.description }}</p>
           <span>Read more...</span>
-          TAG LIST
+          <AppTagsList :tagsList='article.tagList'/>
         </router-link>
       </div>
 
@@ -47,11 +47,13 @@
 <script>
 import {actionTypes} from '@/store/modules/feed';
 import {mapState} from 'vuex';
-import AppPagination from '@/components/AppPagination';
 import {FEED_VARS} from '@/helpers/vars'
 import {stringify, parseUrl} from 'query-string'
+
+import AppPagination from '@/components/AppPagination';
 import AppBasicLoader from '@/components/AppBasicLoader';
 import AppBasicError from '@/components/AppBasicError';
+import AppTagsList from '@/components/AppTagsList';
 
 export default {
   name: 'AppFeed',
@@ -60,6 +62,7 @@ export default {
     AppPagination,
     AppBasicLoader,
     AppBasicError,
+    AppTagsList,
   },
 
   props: {
